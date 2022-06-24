@@ -1,14 +1,35 @@
 const Project = require('../models/project.modle');
+const Bug = require('../models/bug.modle');
+const { ObjectId } = require('bson');
+
 
 
 
 
 module.exports  = {
+
+    findProjectBugs: async (req,res) => {
+
+        try{
+            const getProjectBugs = await Project.find({_id:req.params.id}).populate('bugs')
+            
+
+            console.log(getProjectBugs)
+            res.json(getProjectBugs)
+        }
+        catch(err) {
+            console.log(err)
+            res.json(err)
+
+        }
+    },
+
     findAllProjects:  (async (req,res) => {
         try{
-        const findProjects = await Project.find({})
-        console.log(findProjects)
+        const findProjects = await Project.find({},{projectName:1})
 
+
+        console.log(findProjects)
         return res.json(findProjects)
       
     }
@@ -61,22 +82,26 @@ module.exports  = {
                 console.log(err)
                 return res.json(err)
             }
-    }
+    },
 
-    // deleteBug: async (req,res) => {
-    //     try{
+    deleteBug: async (req,res) => {
+        try{
             
-    //         // const deleteABug = await Project.updateOne({},{"$pull": {bugs: {_id:req.params.id}} } )
-    //         // const deleteABug = await Project.deleteOne({bugs:{_id:body.params.id}})
-    //            const deleteABugb =  await Project.updateOne( {_id:req.params.projid}, { $pull: { bugs: { _id: req.params.id } } } )
-    //             console.log("deleted")
-    //             return res.json(deleteABugb)
 
-    //     }catch(err){
-    //         console.log("Deleted")
-    //         return res.json(err)
-    //     }
-    // } ,
+               const deleteABugb =  await Project.updateOne( {_id:req.params.projid}, { $pull: { bugs: ObjectId(req.params.id) } },{new:true} )
+                console.log("deleted")
+                console.log(deleteABugb)
+
+                const deleteBug = await Bug.deleteOne({_id:req.params.id})
+                console.log(deleteBug)
+
+                return res.json({deleteABugb,deleteBug})
+
+        }catch(err){
+            console.log("Deleted")
+            return res.json(err)
+        }
+    } ,
 
     
 }

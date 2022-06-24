@@ -5,6 +5,9 @@ module.exports = (app) => {
     app.post('/api/project/',ProjectController.createProject);
     app.delete('/api/delete/project/:id',ProjectController.deleteProject);
     app.put('/api/update/project/:id',ProjectController.updateProject);
+    app.get('/api/project/:id',ProjectController.findProjectBugs);
+    app.put('/api/delete/bug/:id/:projid',ProjectController.deleteBug);
+
 
 
 

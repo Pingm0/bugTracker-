@@ -28,7 +28,9 @@ const BugsSchema = new mongoose.Schema({
             enum:['Enhancement','Bug'],    
         },
         bugStatus: {
-            type: String
+            type: String,
+            enum:['Fixed','Reported','inprogress'],    
+
         },
         stepsToReproduce: {
             type: String

@@ -11,9 +11,7 @@ const projectSchema = new mongoose.Schema({
         required:[true,'Please Provide Project name'],
         
     },
-
-
-    
+    bugs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Bug" }],
 },{timestamps:true});
 
 

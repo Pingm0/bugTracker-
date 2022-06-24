@@ -1,10 +1,12 @@
 const Bug = require('../models/bug.modle');
+const Project = require('../models/project.modle');
+
 
 module.exports  = {
 
     findAllBugs: async (req,res) => {
         try{
-            const allBugs = await Bug.find({})
+            const allBugs = await Bug.find({}).populate({path:'projectId', select:'projectName'})
             console.log(allBugs)
     
             return res.json(allBugs)
@@ -39,6 +41,10 @@ module.exports  = {
 
             console.log(newBug)
             const savenewBug = await newBug.save()
+            const bugId = savenewBug._id
+            console.log(bugId)
+
+            const addBugToProject = await Project.updateOne({_id: projectId},{"$push": {"bugs": bugId}})
             return res.json(savenewBug)
         }
         catch(err){
@@ -58,6 +64,8 @@ module.exports  = {
             return res.json(err)
         }
     },
+
+
 
     updateBug: async (req,res) => {
         try{
