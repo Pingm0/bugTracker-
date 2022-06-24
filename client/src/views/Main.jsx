@@ -98,10 +98,10 @@ function Main() {
                     <div class="collapse navbar-collapse" id="navbarExample01">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="#">{projectId ? <Link to={`/addProject`} >Add Project</Link> : null}</a>
+                            <a class="nav-link" aria-current="page" href="#">{<Link to={`/addProject`} >Add Project</Link>}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{ <Link to={`/addBug/${projectId}`} >Add Bug</Link>}</a>
+                            <a class="nav-link" href="#">{projectId ? <Link to={`/addBug/${projectId}`} >Add Bug</Link> : null}</a>
                         </li>
                         </ul>
                     </div>

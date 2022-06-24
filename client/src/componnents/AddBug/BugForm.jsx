@@ -60,8 +60,8 @@ function BugForm() {
     <Form.Group className="mb-3" controlId="BugOpt">
     <select className="form-select" aria-label="Bug Type" onChange={(e) =>hadnleChange(e)} name='bugType'value={bugData.bugType}>
             <option >Bug Type</option>
-            <option value="Enhancement">High</option>
-            <option value="Bug">Medium</option>
+            <option value="Enhancement">Bug</option>
+            <option value="Bug">Enhancement</option>
 
         </select>
         <select className="form-select" aria-label="Bug Severity" onChange={(e) =>hadnleChange(e)} name='severity'value={bugData.severity}>
